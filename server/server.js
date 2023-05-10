@@ -24,7 +24,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/tickets", require("./routes/ticketRoutes"));
 
 // Serve Frontend
-if (process.ENV.node_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   // Set build folder as static folder
   app.use(express.static(path.join(__dirname, "../client/build")));
 
