@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const colors = require("colors");
 require("dotenv").config();
@@ -21,6 +22,22 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/tickets", require("./routes/ticketRoutes"));
+
+// Serve Frontend
+if (process.ENV.node_ENV === "production") {
+  // Set build folder as static folder
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "client", "build", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.status(200).send("Welcome to Help Desk");
+  });
+}
 
 app.use(errorHandler);
 
