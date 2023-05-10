@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     tickets: ticketReducer,
-    note: noteReducer,
+    notes: noteReducer,
   },
 });
